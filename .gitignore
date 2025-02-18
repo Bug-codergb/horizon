@@ -16,3 +16,5 @@ yarn-debug.log*
 yarn-error.log*
 .vercel
 .pnpm-debug.log*
+venv
+__pycache__
