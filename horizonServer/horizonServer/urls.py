@@ -22,9 +22,9 @@ urlpatterns = [
     # path("user/<int:userId>",views.user),
     # path("cater",views.cater),
     # path("login/<path:paths>",views.login)
-    path("user/",include("user.urls"),name="user"),
-    path("login/",include("login.urls"),name="login"),#server 内部跳转可以用到name
-    path("setting/",include("setting.urls")),
+    path("user/",include("user.urls",namespace="x1")),#生成url时，使用x1:user反向生成
+    path("login/",include("login.urls",namespace="x2")),#server 内部跳转可以用到name
+    path("setting/",include("setting.urls",namespace="x3")),
     path("web/",include("web.urls")),
     path("movies/",include("apps.movies.urls")),
     path("cinema/",include("apps.cinema.urls")),
