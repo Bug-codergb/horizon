@@ -35,9 +35,9 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #'django.contrib.admin',
     #'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
+    #'django.contrib.contenttypes',
+    #'django.contrib.sessions',
+    #'django.contrib.messages',
     'django.contrib.staticfiles',
     'setting.apps.SettingConfig'
 ]
@@ -50,6 +50,9 @@ MIDDLEWARE = [
     #'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.md.MyMd1',
+    'middlewares.md.MyMd2',
+    'middlewares.md.MyMd3',
 ]
 
 ROOT_URLCONF = 'horizonServer.urls'
@@ -78,8 +81,12 @@ WSGI_APPLICATION = 'horizonServer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'horizon',
+        'USER':'root',
+        'PASSWORD':'guobin250520',
+        'HOST':'127.0.0.1',
+        'PORT':'3306'
     }
 }
 

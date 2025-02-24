@@ -6,3 +6,12 @@ python3 manage.py startapp [app路径]
 ```shell
 python3 manage.py runserver
 ```
+- 生成model配置文件
+```shell
+ python3 manage.py makemigrations
+```
+
+```生成数据库表（根据model配置文件）
+python3 manage.py migrate
+
+```
