@@ -13,7 +13,7 @@ class MyMd1(MiddlewareMixin):
 class MyMd2(MiddlewareMixin):
   def process_request(self,request):
     print("md2请求进入")
-    return HttpResponse("终端")
+    #return response #HttpResponse("终端")
   def process_response(self,request,response):
     print("md2请求结束")
     return response

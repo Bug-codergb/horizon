@@ -39,17 +39,20 @@ INSTALLED_APPS = [
     #'django.contrib.sessions',
     #'django.contrib.messages',
     'django.contrib.staticfiles',
-    'setting.apps.SettingConfig'
+    'setting.apps.SettingConfig',
+    "user.apps.UserConfig",
+    "drf.apps.DrfConfig",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
     #'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.contrib.sessions.middleware.SessionMiddleware',
+    #'django.middleware.common.CommonMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'django.contrib.messages.middleware.MessageMiddleware',
+    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'middlewares.md.MyMd1',
     'middlewares.md.MyMd2',
     'middlewares.md.MyMd3',
@@ -67,11 +70,15 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 #'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                #'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+REST_FRAMEWORK={
+    "UNAUTHENTICATED_USER":None
+}
 
 WSGI_APPLICATION = 'horizonServer.wsgi.application'
 
@@ -81,12 +88,18 @@ WSGI_APPLICATION = 'horizonServer.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'dj_db_conn_pool.backends.mysql',
         'NAME': 'horizon',
         'USER':'root',
         'PASSWORD':'guobin250520',
         'HOST':'127.0.0.1',
-        'PORT':'3306'
+        'PORT':'3306',
+        'POOL_OPTIONS':{
+            "POOL_SIZE":10,
+            "MAX_OVERFLOW":10,
+            "RECYCLE":24*60*60,
+            "TIMEOUT":30
+        }
     }
 }
 

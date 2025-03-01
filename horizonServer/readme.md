@@ -11,7 +11,7 @@ python3 manage.py runserver
  python3 manage.py makemigrations
 ```
 
-```生成数据库表（根据model配置文件）
+- 生成数据库表（根据model配置文件）
+```shell
 python3 manage.py migrate
-
 ```
