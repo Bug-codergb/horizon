@@ -77,7 +77,8 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK={
-    "UNAUTHENTICATED_USER":None
+    "UNAUTHENTICATED_USER":None,
+    "DEFAULT_AUTHENTICATION_CLASSES":['drf.authentication.MyAuthentication']
 }
 
 WSGI_APPLICATION = 'horizonServer.wsgi.application'
