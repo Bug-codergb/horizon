@@ -77,6 +77,11 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK={
+'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+    ],
     "UNAUTHENTICATED_USER":None,
     "DEFAULT_AUTHENTICATION_CLASSES":['drf.authentication.MyAuthentication']
 }
@@ -149,3 +154,7 @@ STATICFILES_DIRS=[
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 APPEND_SLASH=False#不会自动加/
+
+
+MEDIA_URL = '/media/'  # 用于访问上传文件的 URL 前缀
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 上传文件的存储路径
