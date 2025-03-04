@@ -15,3 +15,7 @@ python3 manage.py runserver
 ```shell
 python3 manage.py migrate
 ```
+- 导出依赖到配置文件
+```shell
+pip3 freeze > requirements.txt
+```
