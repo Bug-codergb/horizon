@@ -19,3 +19,7 @@ python3 manage.py migrate
 ```shell
 pip3 freeze > requirements.txt
 ```
+- 安装依赖
+```shell
+pip3 install -r requirements.txt
+```
