@@ -51,7 +51,7 @@ ROOT_URLCONF = 'horizonBackend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,"templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,3 +137,13 @@ REST_FRAMEWORK={
     ],
     "UNAUTHENTICATED_USER":None,
 }
+
+STATIC_URL = 'static/'
+
+STATICFILES_DIRS=[
+ os.path.join(BASE_DIR,"static") #所有静态资源文件，没有择去app里面找
+]
+
+
+MEDIA_URL = '/media/'  # 用于访问上传文件的 URL 前缀
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 上传文件的存储路径
