@@ -146,4 +146,5 @@ STATICFILES_DIRS=[
 
 
 MEDIA_URL = '/media/'  # 用于访问上传文件的 URL 前缀
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 上传文件的存储路径
+RELATIVE_MEDIA_PATH = 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, RELATIVE_MEDIA_PATH)  # 上传文件的存储路径

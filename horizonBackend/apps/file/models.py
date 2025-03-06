@@ -7,6 +7,7 @@ class File(models.Model):
   originalname=models.CharField(max_length=255,null=True)
   dest = models.CharField(max_length=125,null=True)
   filename = models.CharField(max_length=125,null=False)
+  type = models.CharField(max_length=125,null=True)
   size =models.IntegerField(max_length=125,null=False)
   createTime = models.DateTimeField(default=timezone.now)
   updateTime = models.DateTimeField(auto_now=True)
