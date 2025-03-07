@@ -20,23 +20,17 @@ class CustomPageNumberPagination(pagination.PageNumberPagination):
       if self.page is None:
         # 如果页码超出范围，返回空列表和默认的分页信息
         return Response({
-          'count': 0,  # 总记录数为 0
-          'next': None,
-          'previous': None,
+          'count': 0,  # 总记录数为
           'results': data,  # 空列表
         })
       else:
         # 正常分页情况
         return Response({
           'count': self.page.paginator.count,
-          'next': None,
-          'previous': None,
           'rows': data,
         })
     except AttributeError as e:
       return Response({
-        'count': 0,  # 总记录数为 0
-        'next': None,
-        'previous': None,
+        'count': 0,  # 总记录数为
         'rows': data,  # 空列表
       })
