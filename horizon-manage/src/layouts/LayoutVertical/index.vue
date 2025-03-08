@@ -30,7 +30,7 @@
   </el-container>
 </template>
 
-<script setup lang="ts" name="layoutVertical">
+<script setup lang="js" name="layoutVertical">
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import { useAuthStore } from "@/stores/modules/auth";
@@ -48,7 +48,8 @@ const globalStore = useGlobalStore();
 const accordion = computed(() => globalStore.accordion);
 const isCollapse = computed(() => globalStore.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
-const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path) as string);
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
+console.log(menuList.value);
 </script>
 
 <style scoped lang="scss">

@@ -56,7 +56,6 @@ class RequestHttp {
     this.service.interceptors.response.use(
       response => {
         const { data, config } = response;
-
         const userStore = useUserStore();
         axiosCanceler.removePending(config);
         config.loading && tryHideFullScreenLoading();

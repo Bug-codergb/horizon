@@ -5,13 +5,13 @@
         <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
           <div
             class="el-breadcrumb__inner is-link"
-            :class="{ 'item-no-icon': !item.meta.icon }"
+            :class="{ 'item-no-icon': !(item.meta && item.meta.icon) }"
             @click="onBreadcrumbClick(item, index)"
           >
-            <el-icon v-if="item.meta.icon && globalStore.breadcrumbIcon" class="breadcrumb-icon">
+            <el-icon v-if="item.meta && item.meta.icon && globalStore.breadcrumbIcon" class="breadcrumb-icon">
               <component :is="item.meta.icon"></component>
             </el-icon>
-            <span class="breadcrumb-title">{{ item.meta.title }}</span>
+            <span class="breadcrumb-title">{{ item.meta?.title }}</span>
           </div>
         </el-breadcrumb-item>
       </transition-group>

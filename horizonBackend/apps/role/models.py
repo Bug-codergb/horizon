@@ -1,5 +1,6 @@
 from django.db import models
 from apps.user.models import User
+
 # Create your models here.
 class Role(models.Model):
   name=models.CharField(max_length=125,unique=True,null=False)

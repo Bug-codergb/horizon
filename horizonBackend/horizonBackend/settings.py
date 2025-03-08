@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.file.apps.FileConfig',
     'apps.user.apps.UserConfig',
-    "apps.role.apps.RoleConfig"
+    "apps.role.apps.RoleConfig",
+    "apps.menu.apps.MenuConfig"
 ]
 
 MIDDLEWARE = [
@@ -111,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-hans'
 
 TIME_ZONE = 'UTC'
 

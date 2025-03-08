@@ -63,7 +63,7 @@ watch(
 // 初始化需要固定的 tabs
 const initTabs = () => {
   authStore.flatMenuListGet.forEach(item => {
-    if (item.meta.isAffix && !item.meta.isHide && !item.meta.isFull) {
+    if (item.meta && item.meta.isAffix && !item.meta.isHide && !item.meta.isFull) {
       const tabsParams = {
         icon: item.meta.icon,
         title: item.meta.title,

@@ -8,7 +8,7 @@ class File(models.Model):
   dest = models.CharField(max_length=125,null=True)
   filename = models.CharField(max_length=125,null=False)
   type = models.CharField(max_length=125,null=True)
-  size =models.IntegerField(max_length=125,null=False)
+  size =models.IntegerField(null=False)
   createTime = models.DateTimeField(default=timezone.now)
   updateTime = models.DateTimeField(auto_now=True)
   class Meta:

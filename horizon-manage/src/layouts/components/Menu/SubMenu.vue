@@ -10,24 +10,31 @@
       <SubMenu :menu-list="subItem.children" />
     </el-sub-menu>
     <el-menu-item v-else :index="subItem.path" @click="handleClickMenu(subItem)">
-      <el-icon v-if="subItem.meta.icon">
+      <el-icon v-if="subItem.meta && subItem.meta.icon">
         <component :is="subItem.meta.icon"></component>
       </el-icon>
       <template #title>
-        <span class="sle">{{ subItem.meta.title }}</span>
+        <span class="sle">{{ subItem.meta?.title }}</span>
       </template>
     </el-menu-item>
   </template>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { useRouter } from "vue-router";
 
-defineProps<{ menuList: Menu.MenuOptions[] }>();
+defineProps({
+  menuList: {
+    type: Array,
+    default() {
+      return [];
+    }
+  }
+});
 
 const router = useRouter();
-const handleClickMenu = (subItem: Menu.MenuOptions) => {
-  if (subItem.meta.isLink) return window.open(subItem.meta.isLink, "_blank");
+const handleClickMenu = subItem => {
+  if (subItem.meta && subItem.meta.isLink) return window.open(subItem.meta.isLink, "_blank");
   router.push(subItem.path);
 };
 </script>
