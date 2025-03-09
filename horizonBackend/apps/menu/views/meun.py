@@ -13,6 +13,7 @@ class CreateMenuView(APIView):
                         path = menu_obj['path'],
                         component=menu_obj['component'],
                         meta = menu_obj['meta'],
+                        sort=menu_obj['sort'],
                         parent_id=menu_obj['parent_id'])
     return RetResponse.success(None,None)
 # 所有菜单

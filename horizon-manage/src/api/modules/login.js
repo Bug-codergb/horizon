@@ -1,6 +1,3 @@
-import { PORT1 } from "@/api/config/servicePort";
-//import authMenuList from "@/assets/json/authMenuList.json";
-//import authButtonList from "@/assets/json/authButtonList.json";
 import http from "@/api";
 
 /**
@@ -18,10 +15,10 @@ export const getAuthMenuListApi = () => {
 
 // 获取按钮权限
 export const getAuthButtonListApi = () => {
-  return http.get(PORT1 + `/auth/buttons`, {}, { loading: false });
+  return http.get(`/auth/buttons`, {}, { loading: false });
 };
 
 // 用户退出登录
 export const logoutApi = () => {
-  return http.post(PORT1 + `/logout`);
+  return http.post(`/logout`);
 };

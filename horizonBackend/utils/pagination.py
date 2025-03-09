@@ -3,8 +3,8 @@ from rest_framework.response import Response
 
 class CustomPageNumberPagination(pagination.PageNumberPagination):
   page_size = 10
-  page_size_query_param = "page_size"
-  page_query_param = "page_num"
+  page_size_query_param = "pageSize"
+  page_query_param = "pageNum"
 
   def paginate_queryset(self, queryset, request, view=None):
     """

@@ -6,7 +6,7 @@ class MenuSerializer(ModelSerializer):
   meta = SerializerMethodField()
   class Meta:
     model = Menu
-    fields = ["id","name","path","component","meta","createTime","parent_id","children"]
+    fields = ["id","name","path","component","meta","createTime","parent_id","children","sort"]
   def get_children(self, obj):
     # 递归获取子菜单
     children = obj.children.all().order_by('sort')

@@ -6,6 +6,7 @@ def generateID():
 def getFileSuffix(str):
   index = str.rfind(".")
   return str[index:]
+
 def getStrMD5(s):
   md5_hash = hashlib.md5()
   # 更新哈希对象（需要将字符串编码为字节）
