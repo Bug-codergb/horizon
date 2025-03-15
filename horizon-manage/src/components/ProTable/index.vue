@@ -19,16 +19,15 @@
         <slot name="tableHeader" :selected-list="selectedList" :selected-list-ids="selectedListIds" :is-selected="isSelected" />
       </div>
       <div v-if="toolButton" class="header-button-ri">
-        <slot name="toolButton">
-          <el-button v-if="showToolButton('refresh')" :icon="Refresh" circle @click="getTableList" />
-          <el-button v-if="showToolButton('setting') && columns.length" :icon="Operation" circle @click="openColSetting" />
-          <el-button
-            v-if="showToolButton('search') && searchColumns?.length"
-            :icon="Search"
-            circle
-            @click="isShowSearch = !isShowSearch"
-          />
-        </slot>
+        <slot name="toolButton"></slot>
+        <el-button v-if="showToolButton('refresh')" :icon="Refresh" circle @click="getTableList" />
+        <el-button v-if="showToolButton('setting') && columns.length" :icon="Operation" circle @click="openColSetting" />
+        <el-button
+          v-if="showToolButton('search') && searchColumns?.length"
+          :icon="Search"
+          circle
+          @click="isShowSearch = !isShowSearch"
+        />
       </div>
     </div>
     <!-- 表格主体 -->
