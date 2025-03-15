@@ -15,11 +15,12 @@ class CreateRoleView(APIView):
 class UserRoleView(APIView):
   def post(self,request):
     user_id = request.data.get("user_id")
-    role_id = request.data.get("role_id")
-
-    print(user_id)
-    print(role_id)
-    UserRole.objects.create(user_id_id=user_id,role_id_id=role_id)
+    role_list = request.data.get("role_list")
+    UserRole.objects.filter(user_id_id = user_id).delete()
+    l = []
+    for index,role_id in enumerate(role_list):
+     l.append(UserRole(user_id_id=user_id,role_id_id = role_id))
+    UserRole.objects.bulk_create(l)
     return RetResponse.success(None,None)
 
 class AllRoleView(ListAPIView):

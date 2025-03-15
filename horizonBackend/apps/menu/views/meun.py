@@ -25,6 +25,7 @@ class AllMenuView(ListAPIView):
 class SetRoleMenuView(APIView):
   def post(self,request):
     data_object = request.data
+
     RoleMenu.objects.create(menu_id=data_object['menu_id'],
                             role_id=data_object['role_id'],
                             half=data_object['half'])
