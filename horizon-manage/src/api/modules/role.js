@@ -5,3 +5,6 @@ export function getRoleListApi(params) {
 export function createRoleApi(data) {
   return http.post("/role/create", data);
 }
+export function setUserRoleApi(data) {
+  return http.post("/role/user", data);
+}

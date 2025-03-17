@@ -2,6 +2,7 @@
 import { reactive, ref } from "vue";
 import ProTable from "@/components/ProTable/index.vue";
 import CreateRole from "./component/CreateRole.vue";
+import SetMenu from "./component/SetMenu.vue";
 import { getRoleListApi } from "@/api/modules/role";
 import moment from "moment";
 const columns = reactive([
@@ -29,7 +30,9 @@ const columns = reactive([
     render: scope => {
       return (
         <el-space>
-          <el-link type="success">菜单</el-link>
+          <el-link type="success" onClick={() => handleSetRoleMenu(scope.row)}>
+            菜单
+          </el-link>
           <el-link type="primary">编辑</el-link>
           <el-link type="danger">删除</el-link>
         </el-space>
@@ -45,6 +48,11 @@ const tableRef = ref();
 const search = () => {
   tableRef.value && tableRef.value.search();
 };
+
+const setMenuRef = ref();
+const handleSetRoleMenu = item => {
+  setMenuRef.value && setMenuRef.value.showDrawer(item);
+};
 </script>
 
 <template>
@@ -55,6 +63,7 @@ const search = () => {
       </template>
     </ProTable>
     <CreateRole ref="createRoleRef" @success="search" />
+    <SetMenu ref="setMenuRef" @success="search" />
   </div>
 </template>
 
