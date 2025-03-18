@@ -48,7 +48,7 @@
   </el-container>
 </template>
 
-<script setup lang="ts" name="layoutColumns">
+<script setup lang="js" name="layoutColumns">
 import { ref, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/modules/auth";
@@ -67,9 +67,9 @@ const globalStore = useGlobalStore();
 const accordion = computed(() => globalStore.accordion);
 const isCollapse = computed(() => globalStore.isCollapse);
 const menuList = computed(() => authStore.showMenuListGet);
-const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path) as string);
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 
-const subMenuList = ref<Menu.MenuOptions[]>([]);
+const subMenuList = ref([]);
 const splitActive = ref("");
 watch(
   () => [menuList, route],
@@ -77,7 +77,7 @@ watch(
     // 当前菜单没有数据直接 return
     if (!menuList.value.length) return;
     splitActive.value = route.path;
-    const menuItem = menuList.value.filter((item: Menu.MenuOptions) => {
+    const menuItem = menuList.value.filter(item => {
       return route.path === item.path || `/${route.path.split("/")[1]}` === item.path;
     });
     if (menuItem[0].children?.length) return (subMenuList.value = menuItem[0].children);
@@ -90,7 +90,7 @@ watch(
 );
 
 // change SubMenu
-const changeSubMenu = (item: Menu.MenuOptions) => {
+const changeSubMenu = item => {
   splitActive.value = item.path;
   if (item.children?.length) return (subMenuList.value = item.children);
   subMenuList.value = [];
@@ -99,5 +99,5 @@ const changeSubMenu = (item: Menu.MenuOptions) => {
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@import "./index";
 </style>

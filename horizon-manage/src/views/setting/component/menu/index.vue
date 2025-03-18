@@ -2,7 +2,7 @@
   <div class="table-box">
     <ProTable :columns="columns" ref="tableRef" :request-api="getMenuListApi">
       <template #toolButton>
-        <el-button type="primary" @click="handleCreate">新增</el-button>
+        <el-button type="primary" @click="() => handleCreate()">新增</el-button>
       </template>
       <template #meta="scope">
         <div v-if="scope.row.meta" class="menu-icon">
@@ -17,8 +17,9 @@
 <script setup lang="jsx">
 import { reactive, ref } from "vue";
 import ProTable from "@/components/ProTable/index.vue";
-import { getMenuListApi } from "@/api/modules/menu.js";
+import { getMenuListApi, deleteMenuApi } from "@/api/modules/menu.js";
 import CreateMenu from "./components/createMenu/index.vue";
+import { ElMessage, ElMessageBox } from "element-plus";
 const columns = reactive([
   {
     label: "序号",
@@ -68,8 +69,15 @@ const columns = reactive([
 const handleEdit = item => {
   console.log(item);
 };
-const handleDelete = item => {
-  console.log(item);
+const handleDelete = async item => {
+  try {
+    const ret = await ElMessageBox.confirm("确认删除吗", "提示", {
+      type: "warning"
+    });
+    const res = await deleteMenuApi(item.id);
+    ElMessage.success("删除成功");
+    search();
+  } catch (e) {}
 };
 const createMenuRef = ref();
 const handleCreate = item => {
@@ -83,8 +91,8 @@ const search = () => {
 <style scoped lang="scss">
 .menu-icon {
   svg {
-    font-size: 14px;
     width: 22px;
+    font-size: 14px;
   }
 }
 </style>

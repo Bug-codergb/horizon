@@ -8,3 +8,6 @@ export function createRoleApi(data) {
 export function setUserRoleApi(data) {
   return http.post("/role/user", data);
 }
+export function deleteRoleApi(id) {
+  return http.delete(`/role/delete/${id}`);
+}

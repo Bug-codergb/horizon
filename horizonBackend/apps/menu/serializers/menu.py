@@ -1,7 +1,21 @@
 from rest_framework.serializers import ModelSerializer,SerializerMethodField
 from django.db import connection
-from apps.menu.models import Menu
+from apps.menu.models import Menu,RoleMenu
 import json
+#单个菜单
+class RawMenuSerializer(ModelSerializer):
+  meta = SerializerMethodField()
+  children = SerializerMethodField()
+  class Meta:
+    model = Menu
+    fields = ["id", "name", "path", "component", "meta", "createTime", "parent_id", "children", "sort"]
+  def get_children(self, obj):
+    # 递归获取子菜单
+    return []
+  def get_meta(self, obj):
+    ret = json.loads(obj.meta) if obj.meta != None else None
+    return ret
+
 #所有菜单序列化
 class MenuSerializer(ModelSerializer):
   children = SerializerMethodField()
@@ -40,6 +54,7 @@ class RoleMenuSerializer(ModelSerializer):
               LEFT JOIN role on role.id = rm.role_id
               where u.user_id = %s  and m.id is not null
               )
+            order by sort asc  
           """, [obj['id'],user_id])
         rows = cursor.fetchall()
       if rows:
@@ -52,3 +67,9 @@ class RoleMenuSerializer(ModelSerializer):
   def get_meta(self, obj):
     ret = json.loads(obj['meta']) if obj['meta'] != None else None
     return ret
+
+class SimpleRoleMenuSerializer(ModelSerializer):
+  menu = MenuSerializer()
+  class Meta:
+    model=RoleMenu
+    fields=["id","createTime","role","menu","half"]

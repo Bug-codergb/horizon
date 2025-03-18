@@ -10,7 +10,7 @@ export const loginApi = params => {
 
 // 获取菜单列表
 export const getAuthMenuListApi = () => {
-  return http.get(`/menu/list`, {}, { loading: false });
+  return http.get(`/menu/role/user/1742210914558`, {}, { loading: false });
 };
 
 // 获取按钮权限

@@ -3,8 +3,9 @@ import { reactive, ref } from "vue";
 import ProTable from "@/components/ProTable/index.vue";
 import CreateRole from "./component/CreateRole.vue";
 import SetMenu from "./component/SetMenu.vue";
-import { getRoleListApi } from "@/api/modules/role";
+import { getRoleListApi, deleteRoleApi } from "@/api/modules/role";
 import moment from "moment";
+import { ElMessage, ElMessageBox } from "element-plus";
 const columns = reactive([
   {
     label: "名称",
@@ -34,7 +35,9 @@ const columns = reactive([
             菜单
           </el-link>
           <el-link type="primary">编辑</el-link>
-          <el-link type="danger">删除</el-link>
+          <el-link type="danger" onClick={() => handleDeleteRole(scope.row)}>
+            删除
+          </el-link>
         </el-space>
       );
     }
@@ -52,6 +55,16 @@ const search = () => {
 const setMenuRef = ref();
 const handleSetRoleMenu = item => {
   setMenuRef.value && setMenuRef.value.showDrawer(item);
+};
+const handleDeleteRole = async item => {
+  try {
+    const ret = await ElMessageBox.confirm("确认删除吗?", "提示", {
+      type: "warning"
+    });
+    const res = await deleteRoleApi(item.id);
+    ElMessage.success("删除成功");
+    search();
+  } catch (e) {}
 };
 </script>
 

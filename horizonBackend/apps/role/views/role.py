@@ -24,7 +24,7 @@ class UserRoleView(APIView):
     return RetResponse.success(None,None)
 
 class AllRoleView(ListAPIView):
-  queryset = Role.objects.all()
+  queryset = Role.objects.all().order_by('-createTime')
   serializer_class = RoleSerializer
   pagination_class = CustomPageNumberPagination
 

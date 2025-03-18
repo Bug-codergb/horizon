@@ -8,3 +8,9 @@ export function getMenuListApi(data) {
 export function setRoleMenuApi(data) {
   return http.post("/menu/role", data);
 }
+export function getRoleMenuApi(id) {
+  return http.get(`/menu/role/${id}`, {});
+}
+export function deleteMenuApi(id) {
+  return http.delete(`/menu/delete/${id}`);
+}

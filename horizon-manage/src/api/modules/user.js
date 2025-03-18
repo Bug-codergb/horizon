@@ -8,6 +8,12 @@ import http from "@/api";
 export const getUserListApi = params => {
   return http.get(`/user/all`, params);
 };
+export function createUserApi(data) {
+  return http.post("/user/create", data);
+}
+export function deleteUserApi(id) {
+  return http.delete("/user/delete/" + id);
+}
 
 // 获取树形用户列表
 export const getUserTreeList = params => {

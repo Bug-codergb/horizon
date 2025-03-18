@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from apps.menu.models import Menu,RoleMenu
 from apps.role.models import Role
 from utils.response import RetResponse
-from apps.menu.serializers.menu import MenuSerializer,RoleMenuSerializer
+from apps.menu.serializers.menu import MenuSerializer,RoleMenuSerializer,SimpleRoleMenuSerializer
 from utils.pagination import CustomPageNumberPagination
 #创建菜单
 class CreateMenuView(APIView):
@@ -42,7 +42,7 @@ class DeleteMenu(DestroyAPIView):
   queryset = Menu.objects.all()
   serializer_class = MenuSerializer
 
-class RoleMenuListView(APIView):
+class UserRoleMenuListView(APIView):
   def get(self,request,id):
     with connection.cursor() as cursor:
         cursor.execute("""
@@ -57,6 +57,7 @@ class RoleMenuListView(APIView):
             LEFT JOIN role on role.id = rm.role_id
             where u.user_id = %s
             )
+          order by sort asc  
         """, [id])
         rows = cursor.fetchall()
 
@@ -67,3 +68,9 @@ class RoleMenuListView(APIView):
         return RetResponse.success(ser.data, None)
     else :
       return RetResponse.success(None, None)
+
+class RoleMenuView(APIView):
+  def get(self,request,id):
+    role_menu = RoleMenu.objects.filter(role_id=id)
+    ser = SimpleRoleMenuSerializer(instance=role_menu,many=True)
+    return RetResponse.success(ser.data,None)

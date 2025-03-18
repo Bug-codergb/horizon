@@ -35,6 +35,7 @@ const formData = reactive({
   sort: 0
 });
 const showDrawer = data => {
+  console.log(data);
   isShow.value = true;
   if (data) {
     formData.parent_id = data.id;

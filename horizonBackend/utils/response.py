@@ -43,7 +43,15 @@ class RetResponse:
   def error(data, rows):
     return Response({
       "code":500,
-      "message":"success",
+      "message":"error",
+      "data":data,
+      "rows":rows
+    })
+  @staticmethod
+  def info(code,message,data,rows):
+    return Response({
+      "code":code,
+      "message":message,
       "data":data,
       "rows":rows
     })
