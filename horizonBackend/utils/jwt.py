@@ -8,7 +8,7 @@ class JsonWebToken:
     self.__token=""
     self.payload={
       "iat": datetime.utcnow(),  # 签发时间
-      "exp": datetime.utcnow() + timedelta(hours=1),  # 过期时间
+      "exp": datetime.utcnow() + timedelta(hours=24*7),  # 过期时间
       "sub": kwargs.get("userId"),  # 用户 ID
       "name": kwargs.get("userName"),
     }
