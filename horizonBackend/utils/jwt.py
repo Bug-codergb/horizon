@@ -34,8 +34,8 @@ class JsonWebToken:
       public_key = f.read()
     try:
       decoded = jwt.decode(token, public_key, algorithms=["RS256"])
-      print("Decoded JWT:", decoded)
+      return decoded
     except jwt.ExpiredSignatureError:
-      print("Token has expired")
+      return None
     except jwt.InvalidTokenError:
-      print("Invalid token")
+      return None

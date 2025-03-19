@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'apps.file.apps.FileConfig',
     'apps.user.apps.UserConfig',
     "apps.role.apps.RoleConfig",
-    "apps.menu.apps.MenuConfig"
+    "apps.menu.apps.MenuConfig",
+    "apps.register.apps.RegisterConfig"
 ]
 
 MIDDLEWARE = [
@@ -46,6 +47,7 @@ MIDDLEWARE = [
     #'django.contrib.auth.middleware.AuthenticationMiddleware',
     #'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middlewares.authMiddleware.AuthMiddleware'
 ]
 
 ROOT_URLCONF = 'horizonBackend.urls'
@@ -136,6 +138,7 @@ REST_FRAMEWORK={
         'rest_framework.parsers.MultiPartParser',
     ],
     "UNAUTHENTICATED_USER":None,
+    "DEFAULT_AUTHENTICATION_CLASSES":['utils.authentication.HeaderTokenAuthentication']
 }
 
 STATIC_URL = 'static/'

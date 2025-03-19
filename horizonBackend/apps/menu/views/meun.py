@@ -20,9 +20,12 @@ class CreateMenuView(APIView):
     return RetResponse.success(None,None)
 # 所有菜单
 class AllMenuView(ListAPIView):
-  queryset = Menu.objects.filter(parent__isnull=True).order_by('sort')
   serializer_class = MenuSerializer
   pagination_class = CustomPageNumberPagination
+  def get_queryset(self):
+    print(self.request.user_name)
+    queryset = Menu.objects.filter(parent__isnull=True).order_by('sort')
+    return queryset
 
 class SetRoleMenuView(APIView):
   def post(self,request):
