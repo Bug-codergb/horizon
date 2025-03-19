@@ -16,6 +16,7 @@ class LoginView(APIView):
       return RetResponse.info(400,"用户名或者密码错误",None,None,)
     else:
       jwt = JsonWebToken(userId=user.user_id, userName=user.user_name)
+      jwt.sign()
       user_json={
         "access_token":jwt.token,
         "userName":user.user_name,
@@ -23,5 +24,4 @@ class LoginView(APIView):
         "description":user.description,
         "gender":user.gender
       }
-      jwt.validate(jwt.token+"11")
       return RetResponse.success(user_json,None)

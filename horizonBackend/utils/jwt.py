@@ -1,19 +1,18 @@
 import jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta,UTC
 from django.conf import settings
 import os
 
+blacklist = set()
 class JsonWebToken:
   def __init__(self,**kwargs):
     self.__token=""
     self.payload={
-      "iat": datetime.utcnow(),  # 签发时间
-      "exp": datetime.utcnow() + timedelta(hours=24*7),  # 过期时间
+      "iat": datetime.now(UTC),  # 签发时间
+      "exp": datetime.now(UTC) + timedelta(hours=24*7),  # 过期时间
       "sub": kwargs.get("userId"),  # 用户 ID
       "name": kwargs.get("userName"),
     }
-    self.sign()
-
   @property
   def token(self):
     return self.__token
@@ -34,7 +33,7 @@ class JsonWebToken:
       public_key = f.read()
     try:
       decoded = jwt.decode(token, public_key, algorithms=["RS256"])
-      return decoded
+      return None if token in blacklist else decoded
     except jwt.ExpiredSignatureError:
       return None
     except jwt.InvalidTokenError:
