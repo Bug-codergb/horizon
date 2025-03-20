@@ -10,6 +10,6 @@ class LogoutView(APIView):
     if token is not None:
       token = token[7:]
       blacklist.add(token)
-      return RetResponse.info(403, "您已成功退出当前系统", None, None)
+      return RetResponse.info(200, "您已成功退出当前系统", None, None)
     else :
-      return RetResponse.info(403,"当前用户未登录",None, None)
+      return RetResponse.info(200,"当前用户未登录",None, None)
