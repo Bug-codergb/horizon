@@ -1,5 +1,5 @@
 <template>
-  <ProDrawer v-model="isShow" :title="title" @confirm="handleConfirm">
+  <ProDrawer v-model="isShow" :title="title" @cancel="handleCancel" @confirm="handleConfirm">
     <el-form :model="formData" label-position="top" :rules="rules">
       <el-form-item label="名称" prop="name">
         <el-input v-model="formData.name" placeholder="请输入名称" />
@@ -54,6 +54,9 @@ const handleConfirm = async () => {
     ElMessage.success("影院创建成功");
     emit("success");
   } catch (e) {}
+};
+const handleCancel = () => {
+  isShow.value = false;
 };
 defineExpose({
   showDrawer

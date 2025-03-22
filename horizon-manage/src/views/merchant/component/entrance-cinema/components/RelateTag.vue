@@ -1,5 +1,5 @@
 <template>
-  <ProDrawer v-model="isShow" width="680px" @confirm="handleConfirm" @cancel="handleCancel" title="设置影院标签角色">
+  <ProDrawer v-model="isShow" width="680px" @cancel="handleCancel" @confirm="handleConfirm" title="设置影院标签角色">
     <el-transfer
       :titles="['全部标签', '已选标签']"
       v-model="selected"
@@ -31,7 +31,6 @@ const getCinemaTag = async () => {
   tagList.value = res.rows;
 };
 const filterMethod = (query, item) => {
-  console.log(query);
   return item.name.toLowerCase().includes(query.toLowerCase());
 };
 const handleConfirm = async () => {
