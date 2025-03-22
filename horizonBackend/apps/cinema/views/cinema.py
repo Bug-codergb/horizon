@@ -26,5 +26,9 @@ class CinemaUserView(ListAPIView):
   pagination_class = CustomPageNumberPagination
   def get_queryset(self):
     user_id = self.kwargs.get("id")
-    queryset = Cinema.objects.filter(user_id=user_id)
+    keyword = self.request.query_params.get("keyword")
+
+    if keyword is None or len(keyword.strip())==0:
+      keyword = ""
+    queryset = Cinema.objects.filter(user_id=user_id,name__contains=keyword)
     return queryset
