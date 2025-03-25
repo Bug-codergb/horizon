@@ -43,7 +43,6 @@ export default defineConfig(({ mode }) => {
       port: viteEnv.VITE_PORT,
       open: viteEnv.VITE_OPEN,
       cors: true,
-      // Load proxy configuration from .env.development
       proxy: createProxy(viteEnv.VITE_PROXY)
     },
     plugins: createVitePlugins(viteEnv),

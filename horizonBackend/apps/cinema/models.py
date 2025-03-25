@@ -47,7 +47,7 @@ class CinemaFood(models.Model):
     db_table = "cinema_food"
 # 小吃订单
 class CinemaFoodOrder(models.Model):
-  count = models.IntegerField(max_length=6,null=False)
+  count = models.IntegerField(null=False)
   user = models.ForeignKey(to=User,on_delete=models.CASCADE)
   createTime = models.DateTimeField(auto_now=True)
   food = models.ForeignKey(to=CinemaFood,on_delete=models.CASCADE)

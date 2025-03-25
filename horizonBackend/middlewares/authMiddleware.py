@@ -4,5 +4,5 @@ class AuthMiddleware(MiddlewareMixin):
   def process_request(self,request):
       print("request")
   def process_response(self,request,response):
-    print("响应")
+    print("response")
     return response

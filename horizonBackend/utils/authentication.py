@@ -5,6 +5,8 @@ from utils.jwt import JsonWebToken
 class HeaderTokenAuthentication(BaseAuthentication):
   def authenticate(self, request):
     token = request.META.get("HTTP_AUTHORIZATION")
+    print(token)
+    print("token")
     if token is not None:
       token = token[7:]
       ret = JsonWebToken().validate(token)

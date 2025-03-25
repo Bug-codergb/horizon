@@ -10,7 +10,7 @@ class Film(models.Model):
   name = models.CharField(verbose_name="名称",max_length=225,null=False,unique=True)
   foreign_name = models.CharField(max_length=225,null=True,unique=False)
   alias = models.CharField(max_length=225,null=True,unique=False)
-  dt = models.IntegerField(max_length=20,default=0)
+  dt = models.IntegerField(default=0)
   language = models.CharField(max_length=125,null=True)
   cate = models.ManyToManyField(verbose_name="分类",to=FilmCate,through="FileRelateCate"),
   cover = models.ForeignKey(verbose_name="封面",to=File,on_delete=models.CASCADE)

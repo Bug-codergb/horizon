@@ -33,18 +33,20 @@ class RequestHttp {
     this.service.interceptors.request.use(
       config => {
         const userStore = useUserStore();
-        // 重复请求不需要取消，在 api 服务中通过指定的第三个参数: { cancel: false } 来控制
+
         config.cancel ??= true;
         config.cancel && axiosCanceler.addPending(config);
-        // 当前请求不需要显示 loading，在 api 服务中通过指定的第三个参数: { loading: false } 来控制
+
         config.loading ??= true;
         config.loading && showFullScreenLoading();
         if (config.headers && typeof config.headers.set === "function") {
-          config.headers.set("Authorization", `Bearer ${userStore.token}`);
+          userStore.token && config.headers.set("Authorization", `Bearer ${userStore.token}`);
         }
+
         return config;
       },
       error => {
+        console.log(error);
         return Promise.reject(error);
       }
     );
@@ -57,27 +59,28 @@ class RequestHttp {
       response => {
         const { data, config } = response;
         const userStore = useUserStore();
+        console.log(userStore);
         axiosCanceler.removePending(config);
         config.loading && tryHideFullScreenLoading();
-        // 登录失效
+
         if (data.code == ResultEnum.OVERDUE) {
           userStore.setToken("");
           router.replace(LOGIN_URL);
           ElMessage.error(data.msg);
           return Promise.reject(data);
         }
-        // 全局错误信息拦截（防止下载文件的时候返回数据流，没有 code 直接报错）
+
         if (data.code && data.code !== ResultEnum.SUCCESS) {
           ElMessage.error(data.message);
           return Promise.reject(data);
         }
-        // 成功请求（在页面上除非特殊情况，否则不用处理失败逻辑）
+
         return data;
       },
       async error => {
         const { response } = error;
         tryHideFullScreenLoading();
-        // 请求超时 && 网络错误单独判断，没有 response
+        //请求超时 && 网络错误单独判断，没有 response
         if (error.message.indexOf("timeout") !== -1) ElMessage.error("请求超时！请您稍后重试");
         if (error.message.indexOf("Network Error") !== -1) ElMessage.error("网络错误！请您稍后重试");
         // 根据服务器响应的错误状态码，做不同的处理
