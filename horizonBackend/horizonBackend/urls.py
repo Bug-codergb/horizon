@@ -13,5 +13,6 @@ urlpatterns = [
   path("register",RegisterView.as_view()),
   path("logout",LogoutView.as_view()),
   path("cinema/",include("apps.cinema.urls",namespace="cinema")),
-  path("film/",include("apps.film.urls",namespace="film"))
+  path("film/",include("apps.film.urls",namespace="film")),
+  path("actor/",include("apps.actor.urls",namespace="actor"))
 ]+ static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

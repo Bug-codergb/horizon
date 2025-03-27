@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     "apps.register.apps.RegisterConfig",
     "apps.logout.apps.LogoutConfig",
     "apps.cinema.apps.CinemaConfig",
-    "apps.film.apps.FilmConfig"
+    "apps.film.apps.FilmConfig",
+    "apps.actor.apps.ActorConfig"
 ]
 
 MIDDLEWARE = [
