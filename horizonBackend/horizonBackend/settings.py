@@ -40,9 +40,17 @@ INSTALLED_APPS = [
     "apps.logout.apps.LogoutConfig",
     "apps.cinema.apps.CinemaConfig",
     "apps.film.apps.FilmConfig",
-    "apps.actor.apps.ActorConfig"
+    "apps.actor.apps.ActorConfig",
+    "apps.socketio.apps.SocketioConfig",
+    "channels"
 ]
 
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 MIDDLEWARE = [
     #'django.middleware.security.SecurityMiddleware',
     #'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,3 +163,4 @@ STATICFILES_DIRS=[
 MEDIA_URL = '/media/'  # 用于访问上传文件的 URL 前缀
 RELATIVE_MEDIA_PATH = 'media'
 MEDIA_ROOT = os.path.join(BASE_DIR, RELATIVE_MEDIA_PATH)  # 上传文件的存储路径
+ASGI_APPLICATION = 'horizonBackend.routing.application'
