@@ -1,8 +1,10 @@
 <script setup lang="jsx">
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 import ProTable from "@/components/ProTable/index.vue";
 import { getActorListApi } from "@/api/modules/actor";
 import moment from "moment";
+const router = useRouter();
 const columns = reactive([
   {
     prop: "name",
@@ -45,6 +47,9 @@ const columns = reactive([
     render: scope => {
       return (
         <el-space>
+          <el-link type="primary" onClick={() => handleToDetail(scope.row)}>
+            详情
+          </el-link>
           <el-link type="primary">编辑</el-link>
           <el-link type="danger">删除</el-link>
         </el-space>
@@ -52,6 +57,12 @@ const columns = reactive([
     }
   }
 ]);
+
+const handleToDetail = row => {
+  router.push({
+    path: `/actor/detail/${row.id}`
+  });
+};
 </script>
 
 <template>

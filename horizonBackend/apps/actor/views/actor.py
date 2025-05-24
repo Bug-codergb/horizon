@@ -12,7 +12,12 @@ class CreateActorView(APIView):
     data = request.data
     Actor.objects.create(**data)
     return RetResponse.success(None,None)
-
+class ActorDetailView(APIView):
+  authentication_classes = []
+  def get(self,request,id):
+    ret = Actor.objects.get(id=id)
+    serializer = ActorSerializer(ret)
+    return RetResponse.success(serializer.data,None)
 class CreateDeductiveView(APIView):
   authentication_classes = []
   def post(self,request):
